@@ -1,9 +1,12 @@
 package com.spotify.spotifyproject;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
+//import org.jspecify.annotations.NonNull;
 
 @Entity
+@Nonnull
 @Table(name = "track", schema = "music")
 public class Track {
 
@@ -25,6 +28,18 @@ public class Track {
 
     @Column(name = "audio_file_url", nullable = false)
     private String audioFileUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "performer_artist_id", nullable = false)
+    private Artist performerArtist;
+
+    public Artist getPerformerArtist() {
+        return performerArtist;
+    }
+
+    public void setPerformerArtist(Artist performerArtist) {
+        this.performerArtist = performerArtist;
+    }
 
     public String getAudioFileUrl() {
         return audioFileUrl;

@@ -14,19 +14,21 @@ public class SpotifyProjectApplication {
 
     // This block runs automatically when the app starts
     @Bean
-    public CommandLineRunner readData(TrackRepository repository) {
+    public CommandLineRunner readData(TrackRepository repository, ArtistRepository artistRepository) {
         return args -> {
             System.out.println("------------------------------------------------");
             System.out.println("🔍 READING EXISTING DATA FROM SQL SERVER...");
             System.out.println("------------------------------------------------");
 
             var tracks = repository.findAll();
+            var artists = artistRepository.findAll();
 
-            if (tracks.isEmpty()) {
+            if (tracks.isEmpty() || artists.isEmpty()) {
                 System.out.println("⚠️ No data found! Check your Table Name and mappings.");
             } else {
                 // Loop through and print every song found in the DB
                 tracks.forEach(System.out::println);
+                artists.forEach(System.out::println);
             }
 
             System.out.println("------------------------------------------------");
