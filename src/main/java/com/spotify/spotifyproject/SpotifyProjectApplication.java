@@ -22,6 +22,7 @@ public class SpotifyProjectApplication {
 
             var tracks = repository.findAll();
             var artists = artistRepository.findAll();
+            System.out.println(artists.getFirst().getArtistName());
 
             if (tracks.isEmpty() || artists.isEmpty()) {
                 System.out.println("⚠️ No data found! Check your Table Name and mappings.");
